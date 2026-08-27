@@ -1,0 +1,28 @@
+[Unit]
+Description=llama-swap (local-agent-forge inference server)
+After=network.target
+
+[Service]
+Type=simple
+User=svc-agent-forge
+Group=svc-agent-forge
+EnvironmentFile=/etc/agent-forge/llama-swap.env
+ExecStart=/usr/local/bin/llama-swap -config /var/lib/agent-forge/llama-swap.yaml -listen 0.0.0.0:8090
+Restart=always
+RestartSec=10
+Nice=5
+
+# Least-privilege hardening (mirrors the machine's other hardened services)
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/agent-forge
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+
+[Install]
+WantedBy=multi-user.target

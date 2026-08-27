@@ -1,0 +1,6 @@
+#!/bin/bash
+export HOME=/var/lib/agent-forge
+export XDG_CACHE_HOME=/var/lib/agent-forge/cache
+source /opt/intel/oneapi/setvars.sh > /dev/null 2>&1
+export LD_LIBRARY_PATH="/usr/local/lib/agent-forge:${LD_LIBRARY_PATH}"
+exec /usr/local/bin/llama-server "$@"

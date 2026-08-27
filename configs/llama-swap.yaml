@@ -1,0 +1,36 @@
+healthCheckTimeout: 120
+logLevel: info
+startPort: 10001
+globalTTL: 1800
+
+apiKeys:
+  - "${env.LLAMA_SWAP_API_KEY}"
+
+macros:
+  "models_dir": "/var/lib/agent-forge/models"
+  "common_args": "--host 127.0.0.1 --port ${PORT} -ngl 99 --ctx-size 8192"
+
+models:
+  "qwen2.5-3b":
+    name: "Qwen2.5 3B Instruct (fast)"
+    cmd: /usr/local/bin/llama-server-sycl ${common_args} -m ${models_dir}/Qwen2.5-3B-Instruct-Q4_K_M.gguf
+
+  "qwen2.5-7b":
+    name: "Qwen2.5 7B Instruct (general)"
+    cmd: /usr/local/bin/llama-server-sycl ${common_args} -m ${models_dir}/Qwen2.5-7B-Instruct-Q4_K_M.gguf
+
+  "qwen2.5-coder-7b":
+    name: "Qwen2.5 Coder 7B Instruct"
+    cmd: /usr/local/bin/llama-server-sycl ${common_args} -m ${models_dir}/Qwen2.5-Coder-7B-Instruct-Q4_K_M.gguf
+
+  "deepseek-coder-v2-lite":
+    name: "DeepSeek Coder V2 Lite (MoE)"
+    cmd: /usr/local/bin/llama-server-sycl ${common_args} -m ${models_dir}/DeepSeek-Coder-V2-Lite-Instruct-Q4_K_M.gguf
+
+  "deepseek-r1-distill-qwen-14b":
+    name: "DeepSeek R1 Distill Qwen 14B (reasoning)"
+    cmd: /usr/local/bin/llama-server-sycl ${common_args} --reasoning-format deepseek -m ${models_dir}/DeepSeek-R1-Distill-Qwen-14B-Q4_K_M.gguf
+
+  "nomic-embed-text":
+    name: "Nomic Embed Text v1.5 (embeddings)"
+    cmd: /usr/local/bin/llama-server-sycl --host 127.0.0.1 --port ${PORT} -ngl 99 --embedding --pooling mean -m ${models_dir}/nomic-embed-text-v1.5.Q8_0.gguf

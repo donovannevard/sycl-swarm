@@ -1,0 +1,34 @@
+name: local-agent-forge
+version: 1.0.0
+schema: v1
+# Redacted for the public repo -- apiBase/apiKey below are placeholders, not
+# the real values used on this machine. Replace with your own llama-swap
+# host/port and the API key from your EnvironmentFile (see
+# docs/agent-forge.md).
+models:
+  - name: Qwen2.5 Coder 7B (local)
+    provider: openai
+    model: qwen2.5-coder-7b
+    apiBase: http://YOUR_LLAMA_SWAP_HOST:8090/v1
+    apiKey: YOUR_LLAMA_SWAP_API_KEY
+    roles:
+      - chat
+      - autocomplete
+      - edit
+      - apply
+
+  - name: Qwen2.5 7B (local, general)
+    provider: openai
+    model: qwen2.5-7b
+    apiBase: http://YOUR_LLAMA_SWAP_HOST:8090/v1
+    apiKey: YOUR_LLAMA_SWAP_API_KEY
+    roles:
+      - chat
+
+  - name: DeepSeek R1 Distill 14B (local, slow/deep reasoning)
+    provider: openai
+    model: deepseek-r1-distill-qwen-14b
+    apiBase: http://YOUR_LLAMA_SWAP_HOST:8090/v1
+    apiKey: YOUR_LLAMA_SWAP_API_KEY
+    roles:
+      - chat
